@@ -13,4 +13,6 @@ U64 bishopAttack(Coord square, U64 occupied);
 U64 queenAttack(Coord square, U64 occupied);
 U64 pawnPushOne(Color color, U64 pawns, U64 occupied);
 U64 pawnPushTwo(Color color, U64 pawns, U64 occupied);
+U64 pawnAttackLeft(Color color, U64 pawns);
+U64 pawnAttackRight(Color color, U64 pawns);
 U64 pawnAttack(Color color, U64 pawns);

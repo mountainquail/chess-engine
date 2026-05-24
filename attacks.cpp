@@ -86,17 +86,17 @@ U64 pawnPushTwo(Color color, U64 pawns, U64 occupied){
     }
     //black
     U64 rank5 = 0x000000FF00000000ULL;
-    return pawnPushOne(color, pawns, occupied) << 8 & ~occupied & rank5;
-}
-U64 pawnAttack(Color color, U64 pawns)
-{
-    if(color == WHITE){
-        return pawns << 9 & NOT_A_FILE
-        | pawns << 7 & NOT_H_FILE;
-    }
-    else{
-        return pawns >> 9 & NOT_H_FILE
-        | pawns >> 7 & NOT_A_FILE;
-    }
+    return pawnPushOne(color, pawns, occupied) >> 8 & ~occupied & rank5;
 }
 
+U64 pawnAttackLeft(Color color, U64 pawns) {
+    return color == WHITE ? (pawns << 9) & NOT_A_FILE
+                          : (pawns >> 7) & NOT_A_FILE;
+}
+U64 pawnAttackRight(Color color, U64 pawns) {
+    return color == WHITE ? (pawns << 7) & NOT_H_FILE
+                          : (pawns >> 9) & NOT_H_FILE;
+}
+U64 pawnAttack(Color color, U64 pawns) {
+    return pawnAttackLeft(color, pawns) | pawnAttackRight(color, pawns);
+}

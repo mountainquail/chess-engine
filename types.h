@@ -44,6 +44,21 @@ struct Move {
     bool enPassant;
     Piece captured;
     Piece promo;
+    int prevEnPassant      = 0;
+    int prevCastlingRights = 0;
+    int prevHalfmoveClock  = 0;
+
+    Move() = default;
+    Move(Coord from, Coord to, Piece piece, Color color,
+         bool castle, bool enPassant, Piece captured, Piece promo)
+        : from(from), to(to), piece(piece), color(color),
+          castle(castle), enPassant(enPassant), captured(captured), promo(promo) {}
+};
+
+struct MoveList {
+    Move moves[256];
+    int count = 0;
+    void add(const Move& m) { moves[count++] = m; }
 };
 
 extern const U64 NOT_A_FILE;
