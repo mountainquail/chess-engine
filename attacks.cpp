@@ -5,14 +5,14 @@ U64 KING_ATTACK[64];
 
 U64 knightAttack(Coord square) {
     U64 bsq = 1ULL << square;
-    return ((bsq << 17) & NOT_H_FILE)  |
-           ((bsq << 10) & NOT_GH_FILE) |
-           ((bsq >>  6) & NOT_GH_FILE) |
-           ((bsq >> 15) & NOT_H_FILE)  |
-           ((bsq >> 17) & NOT_A_FILE)  |
-           ((bsq >> 10) & NOT_AB_FILE) |
-           ((bsq <<  6) & NOT_AB_FILE) |
-           ((bsq << 15) & NOT_A_FILE);
+    return ((bsq << 17) & NOT_A_FILE)  |
+           ((bsq << 10) & NOT_AB_FILE) |
+           ((bsq >>  6) & NOT_AB_FILE) |
+           ((bsq >> 15) & NOT_A_FILE)  |
+           ((bsq >> 17) & NOT_H_FILE)  |
+           ((bsq >> 10) & NOT_GH_FILE) |
+           ((bsq <<  6) & NOT_GH_FILE) |
+           ((bsq << 15) & NOT_H_FILE);
 }
 
 void generateKnightAttacks() {
@@ -25,12 +25,12 @@ U64 kingAttack(Coord square) {
     U64 attacks = 0;
     attacks |= (bsq >> 8);
     attacks |= (bsq << 8);
-    attacks |= ((bsq >> 1) & NOT_A_FILE);
-    attacks |= ((bsq << 1) & NOT_H_FILE);
+    attacks |= ((bsq >> 1) & NOT_H_FILE);
+    attacks |= ((bsq << 1) & NOT_A_FILE);
     attacks |= ((bsq >> 9) & NOT_H_FILE);
     attacks |= ((bsq << 9) & NOT_A_FILE);
-    attacks |= ((bsq >> 7) & NOT_H_FILE);
-    attacks |= ((bsq << 7) & NOT_A_FILE);
+    attacks |= ((bsq >> 7) & NOT_A_FILE);
+    attacks |= ((bsq << 7) & NOT_H_FILE);
     return attacks;
 }
 
@@ -62,10 +62,10 @@ U64 bishopAttack(Coord square, U64 occupied)
 {
     U64 bsq = 1ULL << square;
     U64 attacks = 0;
-    attacks |= rayAttacks(bsq, occupied, 9, NOT_H_FILE);
+    attacks |= rayAttacks(bsq, occupied, 9,  NOT_H_FILE);
     attacks |= rayAttacks(bsq, occupied, -9, NOT_A_FILE);
-    attacks |= rayAttacks(bsq, occupied, 7, NOT_H_FILE);
-    attacks |= rayAttacks(bsq, occupied, -7, NOT_A_FILE);
+    attacks |= rayAttacks(bsq, occupied, 7,  NOT_A_FILE);
+    attacks |= rayAttacks(bsq, occupied, -7, NOT_H_FILE);
     return attacks;    
 }
 
